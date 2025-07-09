@@ -1,0 +1,3132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0d0d0d">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <title>Kieran's Catapult Bands | Premium Slingshot Gear</title>
+  <script src="https://js.stripe.com/v3/"></script>
+  <style>
+   body {
+  font-family: 'Segoe UI', sans-serif;
+  background-color: #0d0d0d;
+  color: #ffffff;
+  margin: 0;
+  padding: 0;
+  position: relative;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url('');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  z-index: -2;
+}
+
+header {
+  background: rgba(0, 10, 40, 0.4);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 30px 20px;
+  text-align: center;
+  box-shadow: 0 8px 32px rgba(0, 10, 40, 0.3);
+  position: relative;
+  overflow: hidden;
+}
+
+header::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+  animation: shimmer 3s infinite;
+}
+
+@keyframes shimmer {
+  0% { left: -100%; }
+  100% { left: 100%; }
+}
+
+h1 {
+  font-family: 'Impact', 'Arial Black', sans-serif;
+  font-size: 3.2rem;
+  margin: 0;
+  letter-spacing: 2px;
+  color: #ffffff;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+  font-weight: 900;
+  animation: titleGlow 4s ease-in-out infinite;
+}
+
+@keyframes titleGlow {
+  0%, 100% { 
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8), 0 0 20px #00ff00, 0 0 30px #00ff00, 0 0 40px #00ff00;
+  }
+  50% { 
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8), 0 0 25px #00ff00, 0 0 35px #00ff00, 0 0 45px #00ff00;
+  }
+}
+
+p {
+  font-size: 1.1rem;
+  color: #cccccc;
+}
+
+.tagline-small {
+  font-size: 0.8rem;
+  color: #000000;
+  margin: 5px 0 0 0;
+  font-style: italic;
+}
+
+.date-display {
+  font-size: 0.75rem;
+  color: #333333;
+  margin: 3px 0 0 0;
+  font-weight: normal;
+}
+
+.description-management-bar {
+  background: rgba(0, 10, 40, 0.8);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 15px 20px;
+  text-align: center;
+  margin: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+  position: relative;
+}
+
+.close-management-btn {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  background: #ff6b35;
+  color: #ffffff;
+  border: none;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: none;
+  z-index: 10;
+}
+
+.close-management-btn:hover {
+  background: #e55a2b;
+  box-shadow: 0 0 10px rgba(255, 107, 53, 0.5);
+  transform: scale(1.1);
+}
+
+.description-management-bar h3 {
+  color: #00e5ff;
+  font-family: 'Courier New', 'Monaco', 'Terminal', monospace;
+  margin: 0 0 10px 0;
+  text-shadow: 0 0 5px #00e5ff;
+}
+
+.description-stats {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin: 10px 0;
+  flex-wrap: wrap;
+}
+
+.description-stat {
+  background: rgba(31, 31, 31, 0.7);
+  padding: 8px 15px;
+  border-radius: 6px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  font-family: 'Courier New', 'Monaco', 'Terminal', monospace;
+  font-size: 0.9rem;
+}
+
+.description-stat span {
+  color: #00e5ff;
+  font-weight: bold;
+}
+
+.gallery {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding: 20px;
+  gap: 20px;
+}
+
+.product {
+  background-color: rgba(31, 31, 31, 0.75);
+  padding: 15px;
+  border-radius: 12px;
+  width: 220px;
+  box-shadow: 0 0 10px #00000055;
+  text-align: center;
+  transition: transform 0.3s ease;
+  cursor: pointer;
+  position: relative;
+}
+
+.product:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 20px rgba(0, 229, 255, 0.3);
+}
+
+.product img {
+  width: 200px;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-bottom: 10px;
+}
+
+.product p {
+  color: #00ff00;
+  font-family: 'Courier New', 'Monaco', 'Terminal', monospace;
+  font-weight: bold;
+  text-shadow: 0 0 5px #00ff00;
+  margin: 5px 0;
+}
+
+.product-price {
+  color: #ff6b35;
+  font-family: 'Courier New', 'Monaco', 'Terminal', monospace;
+  font-weight: bold;
+  font-size: 1.1rem;
+  text-shadow: 0 0 5px #ff6b35;
+  margin: 5px 0;
+}
+
+.product-description {
+  color: #00e5ff;
+  font-family: 'Courier New', 'Monaco', 'Terminal', monospace;
+  font-size: 0.8rem;
+  text-shadow: 0 0 3px #00e5ff;
+  margin: 5px 0;
+  line-height: 1.2;
+  max-height: 60px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+}
+
+.product.has-description {
+  border: 2px solid #00e5ff;
+  box-shadow: 0 0 15px rgba(0, 229, 255, 0.4);
+}
+
+.hover-description {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: rgba(31, 31, 31, 0.95);
+  border: 2px solid #00e5ff;
+  border-radius: 8px;
+  padding: 15px;
+  max-width: 300px;
+  z-index: 1000;
+  box-shadow: 0 0 20px rgba(0, 229, 255, 0.5);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.hover-content {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: rgba(31, 31, 31, 0.95);
+  border: 2px solid #00e5ff;
+  border-radius: 8px;
+  padding: 15px;
+  max-width: 300px;
+  z-index: 1000;
+  box-shadow: 0 0 20px rgba(0, 229, 255, 0.5);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+
+.hover-description-content {
+  color: #00e5ff;
+  font-family: 'Courier New', 'Monaco', 'Terminal', monospace;
+  font-size: 0.9rem;
+  line-height: 1.4;
+  text-shadow: 0 0 5px #00e5ff;
+  word-wrap: break-word;
+}
+
+.hover-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  pointer-events: auto;
+}
+
+.hover-buy-button,
+.hover-stripe-button {
+  background-color: #ff6b35;
+  color: #ffffff;
+  border: none;
+  border-radius: 6px;
+  padding: 8px 12px;
+  font-family: 'Courier New', 'Monaco', 'Terminal', monospace;
+  font-size: 0.8rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-shadow: 0 0 5px #ff6b35;
+}
+
+.hover-buy-button:hover,
+.hover-stripe-button:hover {
+  background-color: #e55a2b;
+  box-shadow: 0 0 10px rgba(255, 107, 53, 0.5);
+  transform: scale(1.05);
+}
+
+.hover-stripe-button {
+  background-color: #6c5ce7;
+  text-shadow: 0 0 5px #6c5ce7;
+}
+
+.hover-stripe-button:hover {
+  background-color: #5b4bd1;
+  box-shadow: 0 0 10px rgba(108, 92, 231, 0.5);
+}
+
+.product:hover .hover-content {
+  opacity: 1;
+}
+
+.description-modal {
+  display: none;
+  position: fixed;
+  z-index: 2000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.8);
+  -webkit-backdrop-filter: blur(5px);
+  backdrop-filter: blur(5px);
+}
+
+.description-modal-content {
+  background-color: rgba(31, 31, 31, 0.95);
+  margin: 10% auto;
+  padding: 30px;
+  border: 2px solid #00e5ff;
+  border-radius: 15px;
+  width: 500px;
+  max-width: 90%;
+  text-align: center;
+  box-shadow: 0 0 30px rgba(0, 229, 255, 0.5);
+  position: relative;
+}
+
+.description-modal h2 {
+  color: #00e5ff;
+  font-family: 'Courier New', 'Monaco', 'Terminal', monospace;
+  margin-bottom: 20px;
+  text-shadow: 0 0 10px #00e5ff;
+}
+
+.description-modal img {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin: 10px auto;
+  display: block;
+  border: 2px solid #00e5ff;
+}
+
+.price-input {
+  width: 100%;
+  padding: 12px;
+  margin: 15px 0;
+  border: 2px solid #ff6b35;
+  border-radius: 8px;
+  background-color: rgba(0, 0, 0, 0.7);
+  color: #ffffff;
+  font-size: 1rem;
+  font-family: 'Courier New', 'Monaco', 'Terminal', monospace;
+  text-align: center;
+}
+
+.price-input:focus {
+  outline: none;
+  box-shadow: 0 0 15px rgba(255, 107, 53, 0.5);
+}
+
+.price-label {
+  color: #ff6b35;
+  font-family: 'Courier New', 'Monaco', 'Terminal', monospace;
+  font-weight: bold;
+  margin-bottom: 5px;
+  text-shadow: 0 0 5px #ff6b35;
+}
+
+.description-label {
+  color: #00e5ff;
+  font-family: 'Courier New', 'Monaco', 'Terminal', monospace;
+  font-weight: bold;
+  margin-bottom: 5px;
+  text-shadow: 0 0 5px #00e5ff;
+}
+
+.description-input {
+  width: 100%;
+  padding: 12px;
+  margin: 15px 0;
+  border: 2px solid #00e5ff;
+  border-radius: 8px;
+  background-color: rgba(0, 0, 0, 0.7);
+  color: #ffffff;
+  font-size: 1rem;
+  font-family: 'Courier New', 'Monaco', 'Terminal', monospace;
+  resize: vertical;
+  min-height: 100px;
+}
+
+.description-input:focus {
+  outline: none;
+  box-shadow: 0 0 15px rgba(0, 229, 255, 0.5);
+}
+
+.modal-buttons {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.modal-btn {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 8px;
+  font-family: 'Courier New', 'Monaco', 'Terminal', monospace;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.save-btn {
+  background-color: #00e5ff;
+  color: #000000;
+}
+
+.save-btn:hover {
+  background-color: #00b8cc;
+  box-shadow: 0 0 15px rgba(0, 229, 255, 0.5);
+}
+
+.cancel-btn {
+  background-color: #ff6b35;
+  color: #ffffff;
+}
+
+.cancel-btn:hover {
+  background-color: #e55a2b;
+  box-shadow: 0 0 15px rgba(255, 107, 53, 0.5);
+}
+
+.finish-btn {
+  background-color: #6c5ce7;
+  color: #ffffff;
+}
+
+.finish-btn:hover {
+  background-color: #5b4bd1;
+  box-shadow: 0 0 15px rgba(108, 92, 231, 0.5);
+}
+
+.paypal {
+  text-align: center;
+  margin: 30px;
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.paypal a {
+  background-color: #ffc439;
+  color: #111;
+  padding: 12px 24px;
+  font-size: 1rem;
+  font-weight: bold;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+  display: inline-block;
+}
+
+.paypal a:hover {
+  background-color: #ffb347;
+}
+
+.paypal a:nth-child(2) {
+  background-color: #0066cc;
+  color: #ffffff;
+}
+
+.paypal a:nth-child(2):hover {
+  background-color: #004499;
+}
+
+.news-section {
+  display: flex;
+  justify-content: center;
+  padding: 20px;
+  background: rgba(0, 0, 0, 0.2);
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.news-card {
+  background: rgba(31, 31, 31, 0.9);
+  border-radius: 10px;
+  padding: 15px;
+  max-width: 350px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: transform 0.3s ease;
+}
+
+.news-card:hover {
+  transform: translateY(-3px);
+}
+
+.news-image {
+  width: 60px;
+  height: 60px;
+  object-fit: contain;
+  object-position: center;
+  border-radius: 6px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.news-content {
+  flex: 1;
+}
+
+.news-content h3 {
+  color: #ffffff;
+  margin: 0 0 5px 0;
+  font-size: 0.9rem;
+  font-weight: bold;
+}
+
+.news-title-link {
+  text-decoration: none;
+  color: inherit;
+}
+
+.news-title-link:hover {
+  text-decoration: none;
+}
+
+.news-title-link h3:hover {
+  color: #00e5ff;
+  transition: color 0.3s ease;
+}
+
+.news-content p {
+  color: #cccccc;
+  margin: 0 0 8px 0;
+  line-height: 1.2;
+  font-size: 0.7rem;
+}
+
+.news-link {
+  background-color: #ff6b35;
+  color: #ffffff;
+  padding: 6px 12px;
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: bold;
+  display: inline-block;
+  transition: background-color 0.3s ease;
+  margin-right: 5px;
+  margin-bottom: 5px;
+  font-size: 0.7rem;
+}
+
+.news-link:hover {
+  background-color: #e55a2b;
+  color: #ffffff;
+}
+
+.wiki-link {
+  background-color: #6c5ce7;
+}
+
+.wiki-link:hover {
+  background-color: #5b4bd1;
+}
+
+.slingshot-world-card {
+  background: rgba(31, 31, 31, 0.9);
+  border-radius: 10px;
+  padding: 15px;
+  max-width: 350px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: transform 0.3s ease;
+  position: relative;
+}
+
+.slingshot-world-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(0, 255, 0, 0.3);
+}
+
+.slingshot-world-card:hover::after {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url('article.jpg');
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-color: rgba(0, 0, 0, 0.95);
+  z-index: 1000;
+  cursor: pointer;
+  -webkit-backdrop-filter: blur(5px);
+  backdrop-filter: blur(5px);
+  opacity: 0.8;
+  transition: opacity 0.3s ease;
+}
+
+.slingshot-world-card:hover::before {
+  content: 'Click to read full article';
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background: rgba(0, 0, 0, 0.9);
+  color: #00ff00;
+  padding: 12px 18px;
+  border-radius: 8px;
+  font-family: 'Courier New', 'Monaco', 'Terminal', monospace;
+  font-weight: bold;
+  font-size: 14px;
+  z-index: 1001;
+  border: 2px solid #00ff00;
+  text-shadow: 0 0 8px #00ff00;
+  box-shadow: 0 0 15px rgba(0, 255, 0, 0.5);
+}
+
+.slingshot-world-image {
+  width: 60px;
+  height: 60px;
+  object-fit: contain;
+  object-position: center;
+  border-radius: 6px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.slingshot-world-content {
+  flex: 1;
+}
+
+.slingshot-world-content h3 {
+  color: #ffffff;
+  margin: 0 0 5px 0;
+  font-size: 0.9rem;
+  font-weight: bold;
+}
+
+.slingshot-world-content p {
+  color: #cccccc;
+  margin: 0 0 8px 0;
+  line-height: 1.2;
+  font-size: 0.7rem;
+}
+
+.slingshot-world-title-link {
+  text-decoration: none;
+  color: inherit;
+}
+
+.slingshot-world-title-link:hover {
+  text-decoration: none;
+}
+
+.slingshot-world-title-link h3:hover {
+  color: #00e5ff;
+  transition: color 0.3s ease;
+}
+
+/* Mobile and Tablet Responsive Design */
+@media (max-width: 768px) {
+  /* Header optimizations */
+  header {
+    padding: 20px 15px;
+  }
+  
+  h1 {
+    font-size: 2.2rem;
+    letter-spacing: 1px;
+  }
+  
+  p {
+    font-size: 1rem;
+  }
+  
+  /* Gallery optimizations for tablets */
+  .gallery {
+    padding: 10px;
+    gap: 10px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    justify-content: center;
+  }
+  
+  .product {
+    width: 100%;
+    padding: 10px;
+    min-height: 260px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  
+  .product img {
+    width: 100%;
+    height: 140px;
+    object-fit: cover;
+    flex-shrink: 0;
+  }
+  
+  .product p {
+    font-size: 0.85rem;
+    margin: 6px 0;
+  }
+  
+  .product-price {
+    font-size: 0.95rem;
+    margin: 4px 0;
+  }
+  
+  .product-description {
+    font-size: 0.7rem;
+    max-height: 45px;
+    -webkit-line-clamp: 2;
+    margin: 4px 0;
+  }
+  
+  /* News section tablet layout */
+  .news-card,
+  .slingshot-world-card {
+    flex-direction: column;
+    text-align: center;
+  }
+  
+  .news-image,
+  .slingshot-world-image {
+    width: 100px;
+    height: 100px;
+  }
+  
+  /* Modal optimizations */
+  .description-modal-content {
+    width: 90%;
+    margin: 5% auto;
+    padding: 20px;
+  }
+  
+  .product-detail-card {
+    max-width: 95vw;
+    min-width: 260px;
+    max-height: 90vh;
+  }
+  
+  .detail-card-content {
+    padding: 8px 6px 6px 6px;
+  }
+  
+  .detail-buy-button, .detail-stripe-button {
+    font-size: 0.65rem;
+    padding: 5px 6px;
+  }
+  
+  .detail-product-description {
+    font-size: 0.7rem;
+    padding: 0 2px;
+    line-height: 1.4;
+  }
+}
+
+@media (max-width: 600px) {
+  /* Mobile-specific optimizations */
+  header {
+    padding: 15px 10px;
+  }
+  
+  h1 {
+    font-size: 1.8rem;
+    letter-spacing: 0.5px;
+  }
+  
+  p {
+    font-size: 0.9rem;
+  }
+  
+  /* Efficient 2-column mobile layout */
+  .gallery {
+    padding: 8px;
+    gap: 8px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    justify-content: center;
+  }
+  
+  .product {
+    width: 100%;
+    padding: 8px;
+    min-height: 240px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin-bottom: 0;
+  }
+  
+  .product img {
+    width: 100%;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 6px;
+    flex-shrink: 0;
+  }
+  
+  .product p {
+    font-size: 0.75rem;
+    margin: 4px 0;
+    line-height: 1.2;
+  }
+  
+  .product-price {
+    font-size: 0.9rem;
+    margin: 4px 0;
+  }
+  
+  .product-description {
+    font-size: 0.65rem;
+    max-height: 40px;
+    -webkit-line-clamp: 2;
+    margin: 4px 0;
+    line-height: 1.3;
+  }
+  
+  /* Hover effects disabled on mobile for better UX */
+  .product:hover {
+    transform: none;
+  }
+  
+  .product:hover .hover-content {
+    opacity: 0;
+  }
+  
+  /* Touch-friendly buttons */
+  .hover-buy-button,
+  .hover-stripe-button {
+    padding: 12px 16px;
+    font-size: 0.9rem;
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  /* Modal mobile optimizations */
+  .description-modal-content {
+    width: 95%;
+    margin: 2% auto;
+    padding: 15px;
+    max-height: 95vh;
+    overflow-y: auto;
+  }
+  
+  .description-modal h2 {
+    font-size: 1.2rem;
+    margin-bottom: 15px;
+  }
+  
+  .price-input,
+  .photo-upload-input {
+    padding: 12px;
+    font-size: 16px; /* Prevents zoom on iOS */
+  }
+  
+  /* Management bar mobile */
+  .description-management-bar {
+    margin: 10px;
+    padding: 12px 15px;
+  }
+  
+  .description-stats {
+    gap: 10px;
+  }
+  
+  .description-stat {
+    padding: 6px 10px;
+    font-size: 0.8rem;
+  }
+  
+  /* News section mobile */
+  .news-section {
+    padding: 10px;
+  }
+  
+  .news-card,
+  .slingshot-world-card {
+    margin-bottom: 15px;
+  }
+  
+  .news-image,
+  .slingshot-world-image {
+    width: 80px;
+    height: 80px;
+  }
+  
+  /* Contact section mobile */
+  .contact-section {
+    margin: 8px;
+    padding: 8px;
+  }
+  
+  footer {
+    padding: 15px 10px;
+    font-size: 0.7rem;
+  }
+  
+  /* Show management button mobile positioning */
+  .show-management-btn {
+    bottom: 15px;
+    right: 15px;
+    width: 45px;
+    height: 45px;
+  }
+}
+
+@media (max-width: 480px) {
+  /* Small mobile devices - compact 2-column layout */
+  .gallery {
+    padding: 6px;
+    gap: 6px;
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .product {
+    padding: 6px;
+    min-height: 220px;
+  }
+  
+  .product img {
+    height: 100px;
+  }
+  
+  .product p {
+    font-size: 0.7rem;
+    margin: 3px 0;
+  }
+  
+  .product-price {
+    font-size: 0.85rem;
+  }
+  
+  .product-description {
+    font-size: 0.6rem;
+    max-height: 35px;
+    -webkit-line-clamp: 2;
+  }
+  
+  h1 {
+    font-size: 1.5rem;
+  }
+  
+  .description-modal-content {
+    padding: 12px;
+  }
+  
+  .modal-buttons {
+    flex-direction: column;
+    gap: 8px;
+  }
+  
+  .modal-btn {
+    width: 100%;
+    padding: 12px;
+    font-size: 0.9rem;
+  }
+}
+
+/* Landscape orientation optimizations */
+@media (max-width: 768px) and (orientation: landscape) {
+  .gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 8px;
+    padding: 8px;
+  }
+  
+  .product {
+    min-height: 200px;
+    padding: 8px;
+  }
+  
+  .product img {
+    height: 100px;
+  }
+  
+  .description-modal-content {
+    margin: 1% auto;
+    max-height: 98vh;
+  }
+}
+
+/* Very wide landscape mobile phones */
+@media (max-width: 900px) and (orientation: landscape) and (max-height: 450px) {
+  .gallery {
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 6px;
+  }
+  
+  .product {
+    min-height: 180px;
+    padding: 6px;
+  }
+  
+  .product img {
+    height: 80px;
+  }
+  
+  .product p {
+    font-size: 0.65rem;
+    margin: 2px 0;
+  }
+  
+  .product-price {
+    font-size: 0.8rem;
+  }
+  
+  .product-description {
+    font-size: 0.55rem;
+    max-height: 30px;
+    -webkit-line-clamp: 2;
+  }
+}
+
+/* High DPI displays */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  .product img {
+    image-rendering: -webkit-optimize-contrast;
+  }
+}
+
+/* Touch device optimizations */
+@media (hover: none) and (pointer: coarse) {
+  .product:hover {
+    transform: none;
+  }
+  
+  .product:hover .hover-content {
+    opacity: 0;
+  }
+  
+  /* Larger touch targets */
+  .hover-buy-button,
+  .hover-stripe-button {
+    min-height: 48px;
+    padding: 14px 18px;
+  }
+  
+  .close-management-btn {
+    width: 36px;
+    height: 36px;
+    font-size: 18px;
+  }
+}
+
+/* Mobile-specific product card enhancements */
+@media (max-width: 600px) {
+  .product {
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .product::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(45deg, transparent 30%, rgba(0, 229, 255, 0.1) 50%, transparent 70%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+  }
+  
+  .product:active::after {
+    opacity: 1;
+  }
+  
+  /* Improved product text readability */
+  .product p {
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+    background: rgba(0, 0, 0, 0.3);
+    padding: 4px 8px;
+    border-radius: 4px;
+    margin: 5px 0;
+  }
+  
+  .product-price {
+    background: rgba(255, 107, 53, 0.2);
+    border: 1px solid rgba(255, 107, 53, 0.3);
+    border-radius: 6px;
+    padding: 6px 10px;
+    margin: 8px 0;
+  }
+}
+
+/* Mobile device specific optimizations */
+.mobile-device .product {
+  cursor: pointer;
+  -webkit-tap-highlight-color: rgba(0, 229, 255, 0.3);
+}
+
+.mobile-device .product:active {
+  background-color: rgba(0, 229, 255, 0.1);
+}
+
+.mobile-device .gallery {
+  -webkit-overflow-scrolling: touch;
+  scroll-behavior: smooth;
+}
+
+/* Improved mobile navigation */
+.mobile-device .show-management-btn {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 1000;
+  background: rgba(0, 229, 255, 0.2);
+  border: 2px solid rgba(0, 229, 255, 0.5);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+}
+
+.mobile-device .show-management-btn:hover {
+  background: rgba(0, 229, 255, 0.3);
+  transform: scale(1.1);
+}
+
+/* Mobile-friendly modal improvements */
+.mobile-device .description-modal-content {
+  border-radius: 15px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.8);
+}
+
+.mobile-device .modal-buttons {
+  gap: 12px;
+}
+
+.mobile-device .modal-btn {
+  border-radius: 8px;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* Mobile performance optimizations */
+.mobile-device img {
+  will-change: transform;
+}
+
+.mobile-device .product {
+  will-change: transform;
+  backface-visibility: hidden;
+}
+
+/* Mobile-specific loading states */
+.mobile-device .product img {
+  transition: opacity 0.3s ease;
+}
+
+.mobile-device .product img[loading] {
+  opacity: 0.7;
+}
+
+.mobile-device .product img[loading="lazy"] {
+  opacity: 0.5;
+}
+
+footer {
+  background-color: transparent;
+  text-align: center;
+  padding: 20px;
+  font-size: 0.75rem;
+  color: #ffffff;
+  font-family: 'Courier New', 'Monaco', 'Terminal', monospace;
+}
+
+a {
+  color: #00e5ff;
+  text-decoration: none;
+  text-shadow: 0 0 5px #00ff00;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+footer a {
+  color: #00ff00;
+  font-weight: bold;
+  font-family: 'Courier New', 'Monaco', 'Terminal', monospace;
+}
+
+footer a:hover {
+  color: #00ff00;
+  text-shadow: 0 0 5px #00ff00;
+}
+
+.contact-section {
+  background-color: #000000;
+  border: 2px solid #333333;
+  margin: 12px;
+  border-radius: 10px;
+  padding: 10px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5);
+}
+
+.sling-secret {
+  text-align: center;
+  margin: 10px 0 0 0;
+  padding: 5px;
+}
+
+.sling-secret img {
+  width: 40px;
+  height: 40px;
+  object-fit: cover;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: 1px solid transparent;
+  opacity: 1;
+}
+
+.sling-secret img:hover {
+  transform: scale(1.1);
+  border-color: #00ff00;
+  box-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
+  opacity: 1;
+}
+
+.sling-secret img.clicked {
+  border-color: #ff6b35;
+  box-shadow: 0 0 10px rgba(255, 107, 53, 0.5);
+  animation: pulse 0.5s ease;
+  opacity: 1;
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+  100% { transform: scale(1); }
+}
+
+.photo-upload-section {
+  margin: 15px 0;
+}
+
+.photo-upload-label {
+  color: #00e5ff;
+  font-family: 'Courier New', 'Monaco', 'Terminal', monospace;
+  font-weight: bold;
+  margin-bottom: 5px;
+  text-shadow: 0 0 5px #00e5ff;
+}
+
+.photo-upload-input {
+  width: 100%;
+  padding: 8px;
+  margin: 5px 0;
+  border: 2px solid #00e5ff;
+  border-radius: 6px;
+  background-color: rgba(0, 0, 0, 0.7);
+  color: #ffffff;
+  font-family: 'Courier New', 'Monaco', 'Terminal', monospace;
+  font-size: 0.9rem;
+}
+
+.photo-upload-input:focus {
+  outline: none;
+  box-shadow: 0 0 10px rgba(0, 229, 255, 0.5);
+}
+
+.photo-preview {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin: 10px auto;
+  display: block;
+  border: 2px solid #00e5ff;
+}
+
+.management-buttons {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  margin-top: 15px;
+}
+
+.start-btn {
+  background-color: #00ff00;
+  color: #000000;
+}
+
+.start-btn:hover {
+  background-color: #00cc00;
+  box-shadow: 0 0 15px rgba(0, 255, 0, 0.5);
+}
+
+.finish-btn {
+  background-color: #6c5ce7;
+  color: #ffffff;
+}
+
+.finish-btn:hover {
+  background-color: #5b4bd1;
+  box-shadow: 0 0 15px rgba(108, 92, 231, 0.5);
+}
+
+.show-management-btn {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background-color: rgba(0, 0, 0, 0.5);
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.show-management-btn:hover {
+  background-color: rgba(0, 0, 0, 0.7);
+}
+
+.show-management-btn span {
+  color: #ffffff;
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.product-detail-card {
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(31, 31, 31, 0.98);
+  border: 2px solid #00e5ff;
+  border-radius: 12px;
+  box-shadow: 0 0 40px rgba(0, 229, 255, 0.7);
+  z-index: 4000 !important;
+  min-width: 200px;
+  max-width: 85vw;
+  max-height: 80vh;
+  width: auto;
+  height: auto;
+  padding: 0;
+  animation: fadeIn 0.3s;
+  overflow: auto;
+}
+.detail-card-content {
+  padding: 12px 8px 8px 8px;
+  position: relative;
+  text-align: center;
+}
+.detail-product-name {
+  font-size: 0.9rem;
+  color: #00e5ff;
+  font-family: 'Courier New', 'Monaco', 'Terminal', monospace;
+  font-weight: bold;
+  margin-bottom: 6px;
+  text-shadow: 0 0 8px #00e5ff;
+  line-height: 1.2;
+}
+.detail-product-description {
+  color: #00ff00;
+  font-size: 0.75rem;
+  margin-bottom: 8px;
+  font-family: 'Courier New', 'Monaco', 'Terminal', monospace;
+  font-weight: bold;
+  text-shadow: 0 0 5px #00ff00;
+  line-height: 1.3;
+  word-wrap: break-word;
+  white-space: pre-wrap;
+  max-width: 100%;
+  padding: 0 4px;
+}
+.detail-payment-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 12px;
+}
+.detail-buy-button, .detail-stripe-button {
+  background-color: #ff6b35;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 6px 8px;
+  font-size: 0.7rem;
+  font-family: 'Courier New', 'Monaco', 'Terminal', monospace;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s;
+  box-shadow: 0 0 8px #ff6b3555;
+  text-align: center;
+}
+.detail-stripe-button {
+  background-color: #6c5ce7;
+  text-shadow: 0 0 5px #6c5ce7;
+}
+.detail-buy-button:hover {
+  background-color: #e55a2b;
+}
+.detail-stripe-button:hover {
+  background-color: #5b4bd1;
+}
+.detail-close-button {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  background: #ff6b35;
+  color: #fff;
+  border: none;
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  font-size: 0.9rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s;
+  z-index: 10;
+}
+.detail-close-button:hover {
+  background: #e55a2b;
+}
+@keyframes fadeIn {
+  from { opacity: 0; transform: translate(-50%, -60%); }
+  to { opacity: 1; transform: translate(-50%, -50%); }
+}
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Kieran's Catapult Bands</h1>
+    <p>🎯 Premium Slingshot Gear for Next‑Gen Marksmen 🎯</p>
+    <p class="tagline-small">loving catapults since 2015</p>
+    <p class="date-display" id="currentDate"></p>
+  </header>
+  
+  <div class="description-management-bar" style="display: none;">
+    <button class="close-management-btn" onclick="closeManagementSystem()" id="closeManagementBtn">✕</button>
+    <h3>📝 Product Management System 📝</h3>
+    <p>Click "Start Management" to begin editing product descriptions and prices. Click on any product to add or edit its details.</p>
+    <div class="description-stats">
+      <div class="description-stat">Products with descriptions: <span id="describedCount">0</span></div>
+      <div class="description-stat">Products with prices: <span id="pricedCount">0</span></div>
+      <div class="description-stat">Total products: <span id="totalCount">0</span></div>
+      <div class="description-stat">Completion: <span id="completionPercent">0%</span></div>
+    </div>
+    <div class="management-buttons">
+      <button class="modal-btn start-btn" onclick="startManagement()" id="startBtn">🚀 Start Management</button>
+      <button class="modal-btn finish-btn" onclick="finishManagement()" id="finishBtn" style="display: none;">✅ End Management</button>
+      <button class="modal-btn add-btn" onclick="openAddProductModal()" id="addProductBtn" style="display: none;background-color:#00b894;color:#fff;">➕ Add Product</button>
+      <button class="modal-btn export-btn" onclick="exportData()" id="exportBtn" style="display: none;background-color:#f39c12;color:#fff;">📤 Export Data</button>
+      <button class="modal-btn refresh-btn" onclick="refreshData()" id="refreshBtn" style="display: none;background-color:#3498db;color:#fff;">🔄 Refresh Data</button>
+    </div>
+  </div>
+  
+      <div class="paypal">
+      <a href="https://www.paypal.me/kieranscatapultbandslimited" target="_blank" rel="noopener">
+        💳 Orders via PayPal 💳
+      </a>
+    <a href="https://www.ebay.co.uk/str/kieranscatapultbandslimited?_tab=feedback" target="_blank" rel="noopener">
+      ⭐⭐⭐⭐⭐ View eBay Feedback
+    </a>
+  </div>
+  
+  <div class="gallery" id="gallery">
+    <!-- product cards will be inserted here -->
+  </div>
+  
+  <!-- Description Modal -->
+  <div id="descriptionModal" class="description-modal">
+    <div class="description-modal-content">
+      <h2>Add Product Details</h2>
+      <img id="modalProductImage" src="" alt="Product">
+      
+      <div class="product-name-section">
+        <label for="modalProductNameInput" class="price-label">📝 Product Description</label>
+        <input type="text" id="modalProductNameInput" class="price-input" placeholder="Enter product description...">
+      </div>
+      
+      <div class="price-section">
+        <label for="priceInput" class="price-label">💰 Price (£)</label>
+        <input type="number" id="priceInput" class="price-input" placeholder="0.00" step="0.01" min="0">
+      </div>
+      
+      <div class="photo-upload-section">
+        <label for="photoFileInput" class="photo-upload-label">🖼️ Upload Product Photo (Max 1MB)</label>
+        <input type="file" id="photoFileInput" class="photo-upload-input" accept="image/*" onchange="handlePhotoFileUpload(event)">
+        
+        <label for="photoUrlInput" class="photo-upload-label" style="margin-top: 10px;">🔗 Or Use Photo URL (Recommended)</label>
+        <input type="url" id="photoUrlInput" class="photo-upload-input" placeholder="https://example.com/image.jpg" onchange="handlePhotoUrlInput()">
+        
+        <img id="photoPreview" class="photo-preview" style="display: none;" alt="Photo Preview">
+        <div id="uploadStatus" style="margin-top: 5px; font-size: 0.8rem; color: #00e5ff;"></div>
+      </div>
+      
+      <div class="modal-buttons">
+        <button class="modal-btn save-btn" onclick="saveProductDetails()">💾 Save Details</button>
+        <button class="modal-btn cancel-btn" onclick="closeDescriptionModal()">❌ Cancel</button>
+        <button class="modal-btn delete-btn" onclick="deleteProduct()" style="background-color:#ff3333;color:#fff;">🗑️ Delete Product</button>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Stripe Payment Modal -->
+  <div id="stripeModal" class="description-modal">
+    <div class="description-modal-content">
+      <h2>Complete Purchase</h2>
+      <img id="stripeProductImage" src="" alt="Product">
+      <p id="stripeProductName"></p>
+      <p id="stripeProductPrice" class="popup-product-price"></p>
+      
+      <form id="payment-form">
+        <div id="card-element" style="margin: 20px 0; padding: 12px; border: 2px solid #6772e5; border-radius: 8px; background: rgba(0, 0, 0, 0.7);">
+          <!-- Stripe Elements will be inserted here -->
+        </div>
+        <div id="card-errors" style="color: #ff6b35; margin: 10px 0; font-family: 'Courier New', 'Monaco', 'Terminal', monospace;"></div>
+        
+        <div class="modal-buttons">
+          <button type="submit" class="modal-btn save-btn" id="submit-payment">
+            <span id="button-text">Pay Now</span>
+            <div id="spinner" style="display: none;">Processing...</div>
+          </button>
+          <button type="button" class="modal-btn cancel-btn" onclick="closeStripeModal()">❌ Cancel</button>
+        </div>
+      </form>
+    </div>
+  </div>
+  
+  <div class="news-section">
+    <div class="news-card">
+      <a href="https://www.theengineer.co.uk/content/opinion/time-to-shake-up-the-catapults/" target="_blank" rel="noopener">
+        <img src="kat.png" alt="Catapult Network" class="news-image">
+      </a>
+      <div class="news-content">
+        <a href="https://www.theengineer.co.uk/content/opinion/time-to-shake-up-the-catapults/" target="_blank" rel="noopener" class="news-title-link">
+          <h3>Catapult Network News</h3>
+        </a>
+        <p>Stay updated with the latest developments in the UK's innovation network</p>
+        <a href="https://en.wikipedia.org/wiki/Catapult" target="_blank" rel="noopener" class="news-link wiki-link">
+          📚 Catapult Wiki
+        </a>
+      </div>
+    </div>
+    
+    <div class="slingshot-world-card">
+      <a href="https://www.slingshotworld.co.uk/" target="_blank" rel="noopener">
+        <img src="sling.png" alt="Slingshot World" class="slingshot-world-image">
+      </a>
+      <div class="slingshot-world-content">
+        <a href="https://www.slingshotworld.co.uk/" target="_blank" rel="noopener" class="slingshot-world-title-link">
+          <h3>Slingshot World</h3>
+        </a>
+        <p>The Home of British Slingshot Addicts</p>
+      </div>
+    </div>
+  </div>
+  
+  <div class="contact-section">
+    <footer>
+      <p>Find us on <a href="https://www.facebook.com/kieranleekcb" target="_blank" rel="noopener">Facebook</a> | 
+         <a href="https://www.ebay.co.uk/str/kieranscatapultbandslimited" target="_blank" rel="noopener">eBay</a>
+      </p>
+      <p>Email: <a href="mailto:kieranscatapultbandslimited@gmail.com">kieranscatapultbandslimited@gmail.com</a></p>
+      
+      <div class="sling-secret">
+        <img src="tig.png" alt="Tiger" id="slingSecret" onclick="handleSlingClick()">
+      </div>
+    </footer>
+  </div>
+
+  <!-- Add Product Modal -->
+  <div id="addProductModal" class="description-modal" style="display:none;z-index:3000;">
+    <div class="description-modal-content">
+      <h2>Add New Product</h2>
+      
+      <div class="product-name-section">
+        <label for="newProductName" class="description-label">📝 Product Name</label>
+        <input type="text" id="newProductName" class="photo-upload-input" placeholder="Enter product name...">
+      </div>
+      
+      <div class="price-section">
+        <label for="newProductPrice" class="price-label">💰 Price (£)</label>
+        <input type="number" id="newProductPrice" class="photo-upload-input" placeholder="0.00" step="0.01" min="0">
+      </div>
+      
+      <div class="description-section">
+        <label for="newProductDescription" class="description-label">📄 Description</label>
+        <textarea id="newProductDescription" class="description-input" placeholder="Enter product description..."></textarea>
+      </div>
+      
+      <div class="photo-upload-section">
+        <label for="newPhotoFileInput" class="photo-upload-label">🖼️ Upload Product Photo (Max 1MB)</label>
+        <input type="file" id="newPhotoFileInput" class="photo-upload-input" accept="image/*" onchange="handleNewPhotoFileUpload(event)">
+        
+        <label for="newPhotoUrlInput" class="photo-upload-label" style="margin-top: 10px;">🔗 Or Use Photo URL (Recommended)</label>
+        <input type="url" id="newPhotoUrlInput" class="photo-upload-input" placeholder="https://example.com/image.jpg" onchange="handleNewPhotoUrlInput()">
+        
+        <img id="newPhotoPreview" class="photo-preview" style="display: none;" alt="Photo Preview">
+        <div id="newUploadStatus" style="margin-top: 5px; font-size: 0.8rem; color: #00e5ff;"></div>
+      </div>
+      
+      <div class="modal-buttons">
+        <button class="modal-btn save-btn" onclick="addProduct()">➕ Add Product</button>
+        <button class="modal-btn cancel-btn" onclick="closeAddProductModal()">❌ Cancel</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Global variables for description management
+    let productPrices = {};
+    let productDescriptions = {};
+    let productPhotos = {};
+    let currentProductId = null;
+    let isManagementMode = false;
+    let stripe = null;
+    let elements = null;
+    let currentStripeProduct = null;
+    let slingClickCount = 0;
+    let slingClickTimeout = null;
+    
+    // Mobile detection and optimization
+    const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || window.innerWidth <= 768;
+    const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+    
+    // Mobile-specific optimizations
+    if (isMobile || isTouchDevice) {
+      document.body.classList.add('mobile-device');
+      console.log('Mobile device detected, applying optimizations');
+    }
+    
+    // API URL - Replace with your actual Render backend service URL
+            const API_URL = 'https://kieranscatsb.onrender.com/api/data';
+
+    // GitHub API configuration (you'll need to provide these)
+    const GITHUB_REPO = 'kieranscatapult/kieranscats';
+    const GITHUB_BRANCH = 'main';
+    
+    // Initialize Stripe
+    function initializeStripe() {
+      try {
+        // Replace with your actual Stripe publishable key
+        stripe = Stripe('pk_test_your_publishable_key_here');
+        elements = stripe.elements();
+      } catch (error) {
+        console.error('Failed to initialize Stripe:', error);
+        stripe = null;
+        elements = null;
+      }
+    }
+    
+    async function loadProducts() {
+      try {
+        const resp = await fetch(
+          `https://api.github.com/repos/${GITHUB_REPO}/contents/products`
+        );
+        
+        if (!resp.ok) {
+          throw new Error(`GitHub API error: ${resp.status} - ${resp.statusText}`);
+        }
+        
+        const items = await resp.json();
+        
+        if (!Array.isArray(items)) {
+          throw new Error('Invalid response from GitHub API - expected array');
+        }
+        
+        const gallery = document.getElementById('gallery');
+        if (!gallery) {
+          throw new Error('Gallery element not found in DOM');
+        }
+        
+        const imageFiles = items.filter(file => /\.(png|jpg|jpeg|gif|heic)$/i.test(file.name));
+        
+        imageFiles.forEach((file, index) => {
+          const el = document.createElement('div');
+          el.className = 'product';
+          el.dataset.productId = index;
+          
+          // Remove only the final extension, keep all other parts of the filename
+          const nameWithoutExtension = file.name.replace(/\.[^.]+$/, '');
+          const displayName = nameWithoutExtension.replace(/[-_]/g, ' ');
+          
+          el.innerHTML = `
+            <img src="${file.download_url}" alt="${file.name}" loading="lazy">
+            <p>N/A</p>
+            <p class="product-price" id="price-${index}">£0.00</p>
+            <div class="product-detail-card" id="detail-card-${index}" style="display: none;">
+              <div class="detail-card-content">
+                <div class="detail-product-description" id="detail-description-${index}"></div>
+                <div class="detail-payment-buttons">
+                  <button class="detail-buy-button" onclick="buyProduct(${index}, '${displayName.replace(/'/g, "\\'")}', 'paypal')">
+                    💳 Buy Now via PayPal
+                  </button>
+                  <button class="detail-stripe-button" onclick="buyProduct(${index}, '${displayName.replace(/'/g, "\\'")}', 'stripe')">
+                    💳 Buy Now via Stripe
+                  </button>
+                </div>
+                <button class="detail-close-button" onclick="closeDetailCard(${index}, event)">✕</button>
+              </div>
+            </div>
+            <!-- Mobile touch indicator -->
+            <div class="mobile-touch-indicator" style="display: none;">
+              <span>👆 Tap to view details</span>
+            </div>
+          `;
+          
+          
+          // Add click event listener for description management
+          el.addEventListener('click', (e) => {
+            // Only trigger if not clicking inside the detail card
+            const detailCard = document.getElementById(`detail-card-${index}`);
+            if (detailCard && detailCard.contains(e.target)) {
+              // Click was inside the detail card, do nothing
+              return;
+            }
+            if (isManagementMode) {
+              openDescriptionModal(index, file.download_url, displayName);
+            } else if (productPrices[index]) {
+              // Customer mode - show payment options
+              showPaymentOptions(index, displayName);
+            }
+          });
+          
+          gallery.appendChild(el);
+        });
+        
+        // Ensure all product cards are in the DOM before loading saved data
+        console.log('Product cards created, now loading saved data...');
+        
+        // Small delay to ensure DOM is fully updated
+        await new Promise(resolve => setTimeout(resolve, 100));
+        
+        // Load and display saved data
+        await loadSavedData();
+        
+        // Initialize Stripe (only if Stripe script is loaded)
+        if (typeof Stripe !== 'undefined') {
+          initializeStripe();
+        } else {
+          console.warn('Stripe script not loaded - payment functionality will be limited');
+        }
+        
+      } catch (e) {
+        document.getElementById('gallery').innerHTML =
+          '<p>Error loading products — check console for details.</p>';
+        console.error(e);
+      }
+    }
+    
+    // Load saved data from the backend
+    async function loadSavedData() {
+      try {
+        console.log('Loading saved data from backend...');
+        const response = await fetch(API_URL);
+        console.log('Response status:', response.status);
+        console.log('Response headers:', response.headers);
+        
+        if (!response.ok) {
+          const errorText = await response.text();
+          console.error('Server error response:', errorText);
+          throw new Error(`Server error: ${response.status} - ${errorText}`);
+        }
+        
+        const responseText = await response.text();
+        console.log('Raw response:', responseText);
+        
+        if (!responseText.trim()) {
+          console.log('Empty response, using default empty data');
+          productPrices = {};
+          productDescriptions = {};
+          productPhotos = {};
+        } else {
+          const data = JSON.parse(responseText);
+          console.log('Parsed data from GitHub:', {
+            pricesCount: Object.keys(data.productPrices || {}).length,
+            descriptionsCount: Object.keys(data.productDescriptions || {}).length,
+            photosCount: Object.keys(data.productPhotos || {}).length,
+            prices: data.productPrices,
+            descriptions: data.productDescriptions,
+            photos: data.productPhotos
+          });
+          
+          productPrices = data.productPrices || {};
+          productDescriptions = data.productDescriptions || {};
+          productPhotos = data.productPhotos || {};
+        }
+
+        console.log('About to display data:', {
+          localPricesCount: Object.keys(productPrices).length,
+          localDescriptionsCount: Object.keys(productDescriptions).length,
+          localPhotosCount: Object.keys(productPhotos).length
+        });
+
+        // Check if product cards exist in DOM before displaying data
+        const productCards = document.querySelectorAll('.product');
+        if (productCards.length === 0) {
+          console.warn('No product cards found in DOM, skipping data display');
+          return;
+        }
+
+        console.log(`Found ${productCards.length} product cards, displaying data...`);
+
+        displayPrices();
+        displayDescriptions();
+        displayPhotos();
+        updatePurchaseCardDescriptions();
+        updateDescriptionStats();
+        
+        console.log('Data loading and display complete');
+      } catch (error) {
+        console.error('Error loading saved data:', error);
+        console.log('Using default empty data due to error');
+        productPrices = {};
+        productDescriptions = {};
+        productPhotos = {};
+        
+        // Check if product cards exist in DOM before displaying data
+        const productCards = document.querySelectorAll('.product');
+        if (productCards.length === 0) {
+          console.warn('No product cards found in DOM, skipping data display');
+          return;
+        }
+
+        console.log(`Found ${productCards.length} product cards, displaying default data...`);
+        
+        displayPrices();
+        displayDescriptions();
+        displayPhotos();
+        updatePurchaseCardDescriptions();
+        updateDescriptionStats();
+      }
+    }
+    
+    // Display prices on products
+    function displayPrices() {
+      console.log('Displaying prices for products...');
+      const allProducts = document.querySelectorAll('.product');
+      console.log('Found products:', allProducts.length);
+      
+      allProducts.forEach(product => {
+        const productId = product.dataset.productId;
+        const productElement = product.querySelector(`#price-${productId}`);
+
+        if (!productElement) {
+          console.warn(`Product ${productId}: Price element not found`);
+          return;
+        }
+
+        if (productPrices[productId] && !isNaN(productPrices[productId])) {
+          const price = parseFloat(productPrices[productId]);
+          productElement.textContent = `£${price.toFixed(2)}`;
+          product.classList.add('has-price');
+          console.log(`Product ${productId}: Price set to £${price.toFixed(2)}`);
+        } else {
+          productElement.textContent = '£0.00';
+          product.classList.remove('has-price');
+          console.log(`Product ${productId}: No price set, showing £0.00`);
+        }
+      });
+      console.log('Price display complete');
+    }
+    
+    // Display descriptions on products - Use entered descriptions as the main product text
+    function displayDescriptions() {
+      console.log('Displaying descriptions for products...');
+      console.log('Available descriptions in data:', productDescriptions);
+      const allProducts = document.querySelectorAll('.product');
+      console.log('Found products:', allProducts.length);
+      
+      allProducts.forEach(product => {
+        const productId = product.dataset.productId;
+        const description = productDescriptions[productId] || '';
+        const productNameElement = product.querySelector('p'); // The green product name
+        
+        console.log(`Product ID: ${productId}, Description: "${description}", Element found: ${!!productNameElement}`);
+        
+        if (productNameElement) {
+          if (description && description.trim()) {
+            // Use the entered description as the main product text
+            productNameElement.textContent = description;
+            product.classList.add('has-description');
+            console.log(`Product ${productId}: Description displayed: "${description}"`);
+          } else {
+            // Show "N/A" if no description exists
+            productNameElement.textContent = "N/A";
+            product.classList.remove('has-description');
+            console.log(`Product ${productId}: No description, showing N/A`);
+          }
+        } else {
+          console.warn(`Product ${productId}: Could not find product name element`);
+        }
+      });
+      console.log('Description display complete');
+    }
+    
+    // Display photos on products
+    function displayPhotos() {
+      console.log('Displaying photos for products...');
+      Object.keys(productPhotos).forEach(productId => {
+        const photoUrl = productPhotos[productId];
+        const productCard = document.querySelector(`[data-product-id="${productId}"]`);
+        
+        if (!productCard) {
+          console.warn(`Product card with ID ${productId} not found in DOM`);
+          return;
+        }
+        
+        const productImage = productCard.querySelector('img');
+        
+        if (productImage && photoUrl) {
+          productImage.src = photoUrl;
+          console.log(`Product ${productId}: Photo updated`);
+        } else if (!productImage) {
+          console.warn(`Product ${productId}: Image element not found`);
+        } else if (!photoUrl) {
+          console.warn(`Product ${productId}: No photo URL provided`);
+        }
+      });
+      console.log('Photo display complete');
+    }
+    
+    // Function to compress images before upload to avoid 413 payload errors
+    function compressImage(file, quality = 0.7, maxWidth = 800) {
+      return new Promise((resolve, reject) => {
+        const canvas = document.createElement('canvas');
+        const ctx = canvas.getContext('2d');
+        const img = new Image();
+        
+        img.onload = function() {
+          // Calculate new dimensions while maintaining aspect ratio
+          let { width, height } = img;
+          if (width > maxWidth) {
+            height = (height * maxWidth) / width;
+            width = maxWidth;
+          }
+          
+          // Set canvas size
+          canvas.width = width;
+          canvas.height = height;
+          
+          // Draw and compress image
+          ctx.drawImage(img, 0, 0, width, height);
+          
+          // Convert to compressed data URL
+          const compressedDataUrl = canvas.toDataURL('image/jpeg', quality);
+          
+          // Check if compression was effective
+          const originalSize = file.size;
+          const compressedSize = Math.round((compressedDataUrl.length * 3) / 4); // Rough base64 size estimate
+          
+          console.log(`Image compressed: ${Math.round(originalSize/1024)}KB -> ${Math.round(compressedSize/1024)}KB`);
+          
+          resolve(compressedDataUrl);
+        };
+        
+        img.onerror = function() {
+          reject(new Error('Failed to load image for compression'));
+        };
+        
+        // Load the image
+        img.src = URL.createObjectURL(file);
+      });
+    }
+
+    // Update purchase card descriptions to ensure they only show the correct description variable
+    function updatePurchaseCardDescriptions() {
+      console.log('Updating purchase card descriptions...');
+      const allProducts = document.querySelectorAll('.product');
+      
+      allProducts.forEach(product => {
+        const productId = product.dataset.productId;
+        const detailDescription = product.querySelector(`#detail-description-${productId}`);
+        
+        const description = productDescriptions[productId] || '';
+        const displayText = description || 'N/A';
+        
+        if (detailDescription) {
+          detailDescription.textContent = displayText;
+          console.log(`Purchase card ${productId}: Description set to "${displayText}"`);
+        } else {
+          console.warn(`Product ${productId}: Detail description element not found`);
+        }
+      });
+      console.log('Purchase card descriptions updated');
+    }
+    
+    // Function to handle photo file upload
+    function handlePhotoFileUpload(event) {
+      const file = event.target.files[0];
+      const photoPreview = document.getElementById('photoPreview');
+      const uploadStatus = document.getElementById('uploadStatus');
+      
+      if (file) {
+        // Validate file type
+        if (!file.type.startsWith('image/')) {
+          uploadStatus.textContent = '❌ Please select an image file';
+          uploadStatus.style.color = '#ff6b35';
+          return;
+        }
+        
+        // Validate file size (max 5MB)
+        if (file.size > 5 * 1024 * 1024) {
+          uploadStatus.textContent = '❌ File size must be less than 5MB';
+          uploadStatus.style.color = '#ff6b35';
+          return;
+        }
+        
+        // Clear URL input when file is selected
+        document.getElementById('photoUrlInput').value = '';
+        
+        // Create a preview
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          photoPreview.src = e.target.result;
+          photoPreview.style.display = 'block';
+          uploadStatus.textContent = '✅ Photo selected: ' + file.name;
+          uploadStatus.style.color = '#00ff00';
+        };
+        reader.readAsDataURL(file);
+      } else {
+        photoPreview.style.display = 'none';
+        uploadStatus.textContent = '';
+      }
+    }
+    
+    function openDescriptionModal(productId, imageUrl, productName) {
+      currentProductId = productId;
+      document.getElementById('modalProductImage').src = imageUrl;
+      
+      // Set current price, description, and photo if they exist
+      const currentPrice = productPrices[productId] || '';
+      const currentDescription = productDescriptions[productId] || '';
+      const currentPhoto = productPhotos[productId] || '';
+      
+      // Set the product description input field
+      // Use the saved description if it exists, otherwise leave empty (will default to "N/A")
+      document.getElementById('modalProductNameInput').value = currentDescription;
+      document.getElementById('priceInput').value = currentPrice;
+      
+      // Clear the file input, URL input and status
+      document.getElementById('photoFileInput').value = '';
+      document.getElementById('photoUrlInput').value = '';
+      document.getElementById('uploadStatus').textContent = '';
+      
+      // Show photo preview if available and populate URL field for existing photos
+      const photoPreview = document.getElementById('photoPreview');
+      if (currentPhoto) {
+        photoPreview.src = currentPhoto;
+        photoPreview.style.display = 'block';
+        
+        // If it's a URL (not base64), put it in the URL input for easier editing
+        if (currentPhoto.startsWith('http')) {
+          document.getElementById('photoUrlInput').value = currentPhoto;
+          document.getElementById('uploadStatus').textContent = '🔗 Current photo URL loaded';
+        } else {
+          document.getElementById('uploadStatus').textContent = '📷 Current photo loaded (base64)';
+        }
+        document.getElementById('uploadStatus').style.color = '#00e5ff';
+      } else {
+        photoPreview.style.display = 'none';
+      }
+      
+      document.getElementById('descriptionModal').style.display = 'block';
+      document.getElementById('modalProductNameInput').focus();
+    }
+    
+    function closeDescriptionModal() {
+      document.getElementById('descriptionModal').style.display = 'none';
+      currentProductId = null;
+    }
+    
+    async function saveProductDetails() {
+      const nameInput = document.getElementById('modalProductNameInput');
+      const priceInput = document.getElementById('priceInput');
+      const photoFileInput = document.getElementById('photoFileInput');
+      const photoUrlInput = document.getElementById('photoUrlInput');
+      const productName = nameInput.value.trim();
+      const price = parseFloat(priceInput.value.trim());
+      const photoFile = photoFileInput.files[0];
+      const photoUrl = photoUrlInput.value.trim();
+      
+      if (currentProductId !== null) {
+        if (price && !isNaN(price)) {
+          productPrices[currentProductId] = price;
+        } else {
+          delete productPrices[currentProductId];
+        }
+        
+        // Save the product description - only save if not empty
+        if (productName && productName.trim()) {
+          productDescriptions[currentProductId] = productName.trim();
+        } else {
+          delete productDescriptions[currentProductId];
+        }
+        
+        // Handle photo upload with compression to avoid 413 errors
+        let finalPhotoUrl = productPhotos[currentProductId] || ''; // Keep existing photo if no new upload
+        
+        // Priority: URL input > File upload > Existing photo
+        if (photoUrl) {
+          // User provided a URL - use it directly (recommended method)
+          finalPhotoUrl = photoUrl;
+          productPhotos[currentProductId] = finalPhotoUrl;
+          updateProductDisplay(productName, price, finalPhotoUrl);
+        } else if (photoFile) {
+          try {
+            // Check file size (limit to 1MB to avoid 413 errors)
+            if (photoFile.size > 1024 * 1024) {
+              alert('Photo is too large. Please use an image smaller than 1MB to avoid server errors.\n\nFor now, photo uploads are limited due to server payload restrictions.\n\nAlternative: Use image URLs from external hosting services.');
+              updateProductDisplay(productName, price, photoUrl);
+              return;
+            }
+            
+                         // Compress and convert file to data URL for storage
+             compressImage(photoFile, 0.7, 800).then(compressedDataUrl => {
+               finalPhotoUrl = compressedDataUrl;
+               productPhotos[currentProductId] = finalPhotoUrl;
+               
+               // Update the product display
+               updateProductDisplay(productName, price, finalPhotoUrl);
+             }).catch(error => {
+               console.error('Error compressing photo:', error);
+               alert('Error processing photo. Please try a smaller image or use an image URL instead.');
+               updateProductDisplay(productName, price, finalPhotoUrl);
+             });
+                      } catch (error) {
+              console.error('Error processing photo:', error);
+              alert('Error processing photo. Please try again.');
+              updateProductDisplay(productName, price, finalPhotoUrl);
+              return;
+            }
+          } else {
+            // No new photo uploaded, update display with existing photo
+            updateProductDisplay(productName, price, finalPhotoUrl);
+          }
+      }
+    }
+    
+    // Helper function to update product display
+    function updateProductDisplay(productName, price, photoUrl) {
+      // Update the product display
+      const priceElement = document.querySelector(`#price-${currentProductId}`);
+      if (!priceElement) {
+        console.error(`Price element not found for product ${currentProductId}`);
+        return;
+      }
+      
+      const productCard = priceElement.closest('.product');
+      if (!productCard) {
+        console.error(`Product card not found for product ${currentProductId}`);
+        return;
+      }
+      
+      const productNameElement = productCard.querySelector('p'); // The green product name
+      const productImage = productCard.querySelector('img');
+      
+      // Update product image if new photo provided
+      if (photoUrl && productImage) {
+        productImage.src = photoUrl;
+      }
+      
+      // Update the main card text with the entered description
+      if (productNameElement) {
+        if (productName && productName.trim()) {
+          productNameElement.textContent = productName;
+        } else {
+          productNameElement.textContent = "N/A";
+        }
+      }
+      
+      if (price && !isNaN(price)) {
+        priceElement.textContent = `£${price.toFixed(2)}`;
+        priceElement.style.display = 'block';
+        productCard.classList.add('has-price');
+      } else {
+        priceElement.textContent = '£0.00';
+        priceElement.style.display = 'block';
+        productCard.classList.remove('has-price');
+      }
+      
+      // Add visual indication if description exists
+      if (productDescriptions[currentProductId] && productDescriptions[currentProductId].trim()) {
+        productCard.classList.add('has-description');
+      } else {
+        productCard.classList.remove('has-description');
+      }
+      
+      // Save to backend
+      saveData().then(() => {
+        // Update purchase card descriptions to ensure they show the correct variable
+        updatePurchaseCardDescriptions();
+        // Update stats
+        updateDescriptionStats();
+        // Close modal
+        closeDescriptionModal();
+      }).catch(error => {
+        console.error('Error saving data:', error);
+        alert('Error saving data. Please try again.');
+      });
+    }
+    
+    function updateDescriptionStats() {
+      const products = document.querySelectorAll('.product');
+      const totalCount = products.length;
+      const describedCount = Object.keys(productDescriptions).length;
+      const pricedCount = Object.keys(productPrices).length;
+      const completionPercent = totalCount > 0 ? Math.round(((describedCount + pricedCount) / (totalCount * 2)) * 100) : 0;
+      
+      document.getElementById('totalCount').textContent = totalCount;
+      document.getElementById('describedCount').textContent = describedCount;
+      document.getElementById('pricedCount').textContent = pricedCount;
+      document.getElementById('completionPercent').textContent = `${completionPercent}%`;
+    }
+    
+    function startManagement() {
+      isManagementMode = true;
+      document.getElementById('startBtn').style.display = 'none';
+      document.getElementById('finishBtn').style.display = 'block';
+      document.getElementById('closeManagementBtn').style.display = 'block';
+      document.getElementById('addProductBtn').style.display = 'block';
+      document.getElementById('exportBtn').style.display = 'block';
+      document.getElementById('refreshBtn').style.display = 'block';
+      
+      // Add visual indication that management mode is active
+      document.querySelector('.description-management-bar').style.border = '2px solid #00ff00';
+      document.querySelector('.description-management-bar').style.boxShadow = '0 0 20px rgba(0, 255, 0, 0.3)';
+    }
+    
+    function finishManagement() {
+      isManagementMode = false;
+      
+      // Hide the entire management window
+      document.querySelector('.description-management-bar').style.display = 'none';
+      document.getElementById('addProductBtn').style.display = 'none';
+      document.getElementById('exportBtn').style.display = 'none';
+      
+      const describedCount = Object.keys(productDescriptions).length;
+      const pricedCount = Object.keys(productPrices).length;
+      const totalCount = document.querySelectorAll('.product').length;
+      
+      if (describedCount === 0 && pricedCount === 0) {
+        alert('No product details have been added yet. Click "Start Management" and then click on products to add their details.');
+        return;
+      }
+      
+      const message = `Product Management Complete!\n\n` +
+                     `Products with descriptions: ${describedCount}/${totalCount}\n` +
+                     `Products with prices: ${pricedCount}/${totalCount}\n` +
+                     `Completion: ${Math.round(((describedCount + pricedCount) / (totalCount * 2)) * 100)}%\n\n` +
+                     `All details have been saved to your GitHub repository.`;
+      
+      alert(message);
+      
+      // You could also export the data here
+      console.log('Product Prices:', productPrices);
+      console.log('Product Descriptions:', productDescriptions);
+    }
+    
+    function closeManagementSystem() {
+      isManagementMode = false;
+      
+      // Hide the entire management window
+      document.querySelector('.description-management-bar').style.display = 'none';
+      document.getElementById('addProductBtn').style.display = 'none';
+      document.getElementById('exportBtn').style.display = 'none';
+      
+      alert('Management system closed.');
+    }
+    
+    // Close modal when clicking outside
+    window.onclick = function(event) {
+      const modal = document.getElementById('descriptionModal');
+      if (event.target === modal) {
+        closeDescriptionModal();
+      }
+    }
+    
+    // Display current date with sun/moon icon
+    function updateDateTime() {
+      const now = new Date();
+      const hour = now.getHours();
+      
+      // Determine if it's day or night
+      const isDaytime = hour >= 6 && hour < 18; // 6 AM to 6 PM is daytime
+      const timeIcon = isDaytime ? '☀️' : '🌙';
+      
+      // Format the date
+      const options = { 
+        weekday: 'long', 
+        year: 'numeric', 
+        month: 'long', 
+        day: 'numeric' 
+      };
+      const formattedDate = now.toLocaleDateString('en-US', options);
+      
+      // Update the date display
+      document.getElementById('currentDate').textContent = `${timeIcon} ${formattedDate}`;
+    }
+    
+    // Update date immediately and then every minute
+    updateDateTime();
+    setInterval(updateDateTime, 60000); // Update every minute
+    
+    // Handle article overlay click to close
+    document.addEventListener('click', function(e) {
+      const slingshotCard = document.querySelector('.slingshot-world-card');
+      if (slingshotCard && slingshotCard.matches(':hover')) {
+        // If clicking on the overlay (not the card itself), close it
+        if (e.target === document.body || e.target.classList.contains('article-overlay')) {
+          slingshotCard.style.setProperty('--show-overlay', 'none');
+        }
+      }
+    });
+    
+    // Add click handler to slingshot world card for better article display
+    document.addEventListener('DOMContentLoaded', function() {
+      const slingshotCard = document.querySelector('.slingshot-world-card');
+      if (slingshotCard) {
+        slingshotCard.addEventListener('click', function(e) {
+          // Prevent the default link behavior when clicking on the card
+          e.preventDefault();
+          e.stopPropagation();
+          
+          // Create a full-screen overlay for the article
+          const overlay = document.createElement('div');
+          overlay.className = 'article-overlay';
+          overlay.style.cssText = `
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('article.jpg');
+            background-size: contain;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-color: rgba(0, 0, 0, 0.95);
+            z-index: 1000;
+            cursor: pointer;
+            backdrop-filter: blur(5px);
+          `;
+          
+          // Add close button
+          const closeBtn = document.createElement('div');
+          closeBtn.textContent = 'Click to close';
+          closeBtn.style.cssText = `
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: rgba(0, 0, 0, 0.8);
+            color: #00ff00;
+            padding: 10px 15px;
+            border-radius: 5px;
+            font-family: 'Courier New', 'Monaco', 'Terminal', monospace;
+            font-weight: bold;
+            z-index: 1001;
+            border: 1px solid #00ff00;
+            text-shadow: 0 0 5px #00ff00;
+            cursor: pointer;
+          `;
+          
+          // Add click handlers to close the overlay
+          overlay.addEventListener('click', function() {
+            document.body.removeChild(overlay);
+            document.body.removeChild(closeBtn);
+          });
+          
+          closeBtn.addEventListener('click', function() {
+            document.body.removeChild(overlay);
+            document.body.removeChild(closeBtn);
+          });
+          
+          document.body.appendChild(overlay);
+          document.body.appendChild(closeBtn);
+        });
+      }
+    });
+    
+    // Function to handle buying a product
+    function buyProduct(productId, productName, paymentMethod = 'paypal') {
+      if (productId === null || productId === undefined) {
+        console.error('Invalid product ID provided to buyProduct');
+        return;
+      }
+      
+      const price = productPrices[productId];
+      const description = productDescriptions[productId] || '';
+      
+      if (!price || isNaN(price) || price <= 0) {
+        alert('This product is not available for purchase yet.');
+        return;
+      }
+      
+      if (paymentMethod === 'paypal') {
+        // Create PayPal payment URL
+        const paypalUrl = createPayPalPaymentUrl(productName, price, description);
+        
+        // Open PayPal in new window
+        window.open(paypalUrl, '_blank');
+      } else if (paymentMethod === 'stripe') {
+        // Open Stripe payment modal
+        openStripeModal(productId, productName, price, description);
+      }
+    }
+    
+    // Function to create PayPal payment URL
+    function createPayPalPaymentUrl(productName, price, description) {
+      const paypalUsername = 'kieranscatapultbandslimited'; // Your PayPal username
+      const amount = price.toFixed(2);
+      const itemName = encodeURIComponent(productName || 'Product');
+      const itemDescription = encodeURIComponent(description || '');
+      
+      // PayPal.me URL format
+      const paypalMeUrl = `https://www.paypal.me/${paypalUsername}?amount=${amount}&currency=GBP&note=${itemName}`;
+      
+      return paypalMeUrl;
+    }
+    
+    // Function to open Stripe payment modal
+    function openStripeModal(productId, productName, price, description) {
+      if (!stripe || !elements) {
+        alert('Stripe is not initialized. Please refresh the page and try again.');
+        return;
+      }
+      
+      currentStripeProduct = { productId, productName, price, description };
+      
+      // Set modal content
+      const productImage = document.querySelector(`[data-product-id="${productId}"] img`);
+      if (productImage) {
+        document.getElementById('stripeProductImage').src = productImage.src;
+      }
+      document.getElementById('stripeProductName').textContent = productName;
+      document.getElementById('stripeProductPrice').textContent = `£${price.toFixed(2)}`;
+      
+      // Create Stripe card element
+      const cardElement = elements.create('card', {
+        style: {
+          base: {
+            color: '#ffffff',
+            fontFamily: '"Courier New", "Monaco", "Terminal", monospace',
+            fontSize: '16px',
+            '::placeholder': {
+              color: '#aab7c4'
+            }
+          },
+          invalid: {
+            color: '#ff6b35',
+            iconColor: '#ff6b35'
+          }
+        }
+      });
+      
+      const cardElementContainer = document.getElementById('card-element');
+      if (cardElementContainer) {
+        cardElement.mount('#card-element');
+      } else {
+        console.error('Card element container not found');
+        return;
+      }
+      
+      // Handle real-time validation errors
+      cardElement.addEventListener('change', function(event) {
+        const displayError = document.getElementById('card-errors');
+        if (event.error) {
+          displayError.textContent = event.error.message;
+        } else {
+          displayError.textContent = '';
+        }
+      });
+      
+      // Handle form submission
+      const form = document.getElementById('payment-form');
+      form.addEventListener('submit', function(event) {
+        event.preventDefault();
+        
+        const submitButton = document.getElementById('submit-payment');
+        const buttonText = document.getElementById('button-text');
+        const spinner = document.getElementById('spinner');
+        
+        submitButton.disabled = true;
+        buttonText.style.display = 'none';
+        spinner.style.display = 'block';
+        
+        stripe.createToken(cardElement).then(function(result) {
+          if (result.error) {
+            const errorElement = document.getElementById('card-errors');
+            errorElement.textContent = result.error.message;
+            submitButton.disabled = false;
+            buttonText.style.display = 'block';
+            spinner.style.display = 'none';
+          } else {
+            // Send token to your server
+            processStripePayment(result.token, currentStripeProduct);
+          }
+        });
+      });
+      
+      document.getElementById('stripeModal').style.display = 'block';
+    }
+    
+    // Function to process Stripe payment
+    function processStripePayment(token, product) {
+      // This would typically send the token to your server
+      // For now, we'll simulate a successful payment
+      
+      // You would make an API call to your server here:
+      // fetch('/api/process-payment', {
+      //   method: 'POST',
+      //   headers: { 'Content-Type': 'application/json' },
+      //   body: JSON.stringify({
+      //     token: token.id,
+      //     amount: product.price * 100, // Convert to cents
+      //     currency: 'gbp',
+      //     productName: product.productName,
+      //     productDescription: product.description
+      //   })
+      // })
+      
+      // Simulate successful payment
+      setTimeout(() => {
+        closeStripeModal();
+        alert(`Payment successful! Thank you for purchasing ${product.productName} for £${product.price.toFixed(2)}`);
+      }, 2000);
+    }
+    
+    // Function to close Stripe modal
+    function closeStripeModal() {
+      document.getElementById('stripeModal').style.display = 'none';
+      currentStripeProduct = null;
+      
+      // Clear card element
+      const cardElement = document.getElementById('card-element');
+      if (cardElement) {
+        cardElement.innerHTML = '';
+      }
+      
+      // Reset form
+      document.getElementById('payment-form').reset();
+      document.getElementById('card-errors').textContent = '';
+      document.getElementById('submit-payment').disabled = false;
+      document.getElementById('button-text').style.display = 'block';
+      document.getElementById('spinner').style.display = 'none';
+    }
+    
+    // Function to show payment options
+    function showPaymentOptions(productId, productName) {
+      if (productId === null || productId === undefined) {
+        console.error('Invalid product ID provided to showPaymentOptions');
+        return;
+      }
+      
+      const price = productPrices[productId];
+      const description = productDescriptions[productId] || '';
+      
+      if (!price || isNaN(price) || price <= 0) {
+        alert('This product is not available for purchase yet.');
+        return;
+      }
+      
+      // Close any existing detail cards first
+      closeAllDetailCards();
+      
+      // Show the detail card with payment options
+      const detailCard = document.getElementById(`detail-card-${productId}`);
+      const detailDescription = document.getElementById(`detail-description-${productId}`);
+      
+      if (detailCard && detailDescription) {
+        // Show description if it exists, otherwise show "N/A"
+        detailDescription.textContent = description || 'N/A';
+        detailCard.style.display = 'block';
+      }
+    }
+    
+    // Function to handle sling image clicks
+    function handleSlingClick() {
+      const slingImage = document.getElementById('slingSecret');
+      
+      // Add visual feedback
+      slingImage.classList.add('clicked');
+      setTimeout(() => slingImage.classList.remove('clicked'), 500);
+      
+      slingClickCount++;
+      
+      // Reset counter after 5 seconds of inactivity
+      if (slingClickTimeout) {
+        clearTimeout(slingClickTimeout);
+      }
+      slingClickTimeout = setTimeout(() => {
+        slingClickCount = 0;
+      }, 5000);
+      
+      // Check if 12 clicks reached
+      if (slingClickCount >= 12) {
+        slingClickCount = 0;
+        const managementBar = document.querySelector('.description-management-bar');
+        if (managementBar.style.display === 'block') {
+          closeManagementSystem();
+        } else {
+          activateSecretManagement();
+        }
+      }
+    }
+    
+    // Function to activate secret management mode
+    function activateSecretManagement() {
+      isManagementMode = true;
+      document.getElementById('startBtn').style.display = 'none';
+      document.getElementById('finishBtn').style.display = 'block';
+      document.getElementById('closeManagementBtn').style.display = 'block';
+      document.getElementById('addProductBtn').style.display = 'block';
+      document.getElementById('exportBtn').style.display = 'block';
+      
+      // Show the management window
+      document.querySelector('.description-management-bar').style.display = 'block';
+      
+      // Add visual indication that management mode is active
+      document.querySelector('.description-management-bar').style.border = '2px solid #00ff00';
+      document.querySelector('.description-management-bar').style.boxShadow = '0 0 20px rgba(0, 255, 0, 0.3)';
+      
+      alert('🔓 Secret Management Mode Activated!\n\nYou can now edit product details and photos.\nClick "End Management" or the X button when finished.');
+    }
+    
+    // Function to handle photo URL input
+    function handlePhotoUrlInput() {
+      const photoUrlInput = document.getElementById('photoUrlInput');
+      const photoPreview = document.getElementById('photoPreview');
+      const uploadStatus = document.getElementById('uploadStatus');
+      const url = photoUrlInput.value.trim();
+      
+      if (url) {
+        photoPreview.src = url;
+        photoPreview.style.display = 'block';
+        uploadStatus.textContent = '🔗 Photo URL set (recommended method)';
+        uploadStatus.style.color = '#00ff00';
+        
+        // Clear file input when URL is used
+        document.getElementById('photoFileInput').value = '';
+        
+        photoPreview.onerror = function() {
+          uploadStatus.textContent = '❌ Invalid image URL. Please check the URL and try again.';
+          uploadStatus.style.color = '#ff6b35';
+          photoPreview.style.display = 'none';
+        };
+      } else {
+        photoPreview.style.display = 'none';
+        uploadStatus.textContent = '';
+      }
+    }
+    
+    // Function to handle photo file upload for new product modal
+    function handleNewPhotoFileUpload(event) {
+      const file = event.target.files[0];
+      const photoPreview = document.getElementById('newPhotoPreview');
+      const uploadStatus = document.getElementById('newUploadStatus');
+      
+      if (file) {
+        // Validate file type
+        if (!file.type.startsWith('image/')) {
+          uploadStatus.textContent = '❌ Please select an image file';
+          uploadStatus.style.color = '#ff6b35';
+          return;
+        }
+        
+        // Validate file size (max 5MB)
+        if (file.size > 5 * 1024 * 1024) {
+          uploadStatus.textContent = '❌ File size must be less than 5MB';
+          uploadStatus.style.color = '#ff6b35';
+          return;
+        }
+        
+        // Clear URL input when file is selected
+        document.getElementById('newPhotoUrlInput').value = '';
+        
+        // Create a preview
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          photoPreview.src = e.target.result;
+          photoPreview.style.display = 'block';
+          uploadStatus.textContent = '✅ Photo selected: ' + file.name;
+          uploadStatus.style.color = '#00ff00';
+        };
+        reader.readAsDataURL(file);
+      } else {
+        photoPreview.style.display = 'none';
+        uploadStatus.textContent = '';
+      }
+    }
+    
+    // Function to handle photo URL input for new product modal
+    function handleNewPhotoUrlInput() {
+      const photoUrlInput = document.getElementById('newPhotoUrlInput');
+      const photoPreview = document.getElementById('newPhotoPreview');
+      const uploadStatus = document.getElementById('newUploadStatus');
+      const url = photoUrlInput.value.trim();
+      
+      if (url) {
+        photoPreview.src = url;
+        photoPreview.style.display = 'block';
+        uploadStatus.textContent = '🔗 Photo URL set (recommended method)';
+        uploadStatus.style.color = '#00ff00';
+        
+        // Clear file input when URL is used
+        document.getElementById('newPhotoFileInput').value = '';
+        
+        photoPreview.onerror = function() {
+          uploadStatus.textContent = '❌ Invalid image URL. Please check the URL and try again.';
+          uploadStatus.style.color = '#ff6b35';
+          photoPreview.style.display = 'none';
+        };
+      } else {
+        photoPreview.style.display = 'none';
+        uploadStatus.textContent = '';
+      }
+    }
+    
+    // Function to upload photo to GitHub (if needed)
+    async function uploadPhotoToGitHub(file, productId) {
+      try {
+        // This would require server-side implementation
+        // For now, we'll just store the URL
+        console.log('Photo upload would be implemented with GitHub API');
+        return file;
+      } catch (error) {
+        console.error('Error uploading photo:', error);
+        alert('Error uploading photo. Please try again.');
+        return null;
+      }
+    }
+    
+    // Function to show management window
+    function showManagementWindow() {
+      document.querySelector('.description-management-bar').style.display = 'block';
+      document.getElementById('showManagementBtn').style.display = 'none';
+    }
+    
+    async function deleteProduct() {
+      if (currentProductId === null) return;
+      if (!confirm('Are you sure you want to delete this product?')) return;
+      // Remove from local objects
+      delete productPrices[currentProductId];
+      delete productDescriptions[currentProductId];
+      delete productPhotos[currentProductId];
+      
+      // Save updated data to backend
+      await saveData();
+
+      // Remove from DOM
+      const productCard = document.querySelector(`[data-product-id="${currentProductId}"]`);
+      if (productCard) productCard.remove();
+      closeDescriptionModal();
+      updateDescriptionStats();
+    }
+
+    function openAddProductModal() {
+      document.getElementById('addProductModal').style.display = 'block';
+      document.getElementById('newProductName').value = '';
+      document.getElementById('newProductPrice').value = '';
+      document.getElementById('newProductDescription').value = '';
+      
+      // Clear photo upload fields
+      document.getElementById('newPhotoFileInput').value = '';
+      document.getElementById('newPhotoUrlInput').value = '';
+      document.getElementById('newUploadStatus').textContent = '';
+      
+      // Hide photo preview
+      const photoPreview = document.getElementById('newPhotoPreview');
+      photoPreview.style.display = 'none';
+      
+      // Focus on product name field
+      document.getElementById('newProductName').focus();
+    }
+
+    function closeAddProductModal() {
+      document.getElementById('addProductModal').style.display = 'none';
+      
+      // Clear all fields when closing
+      document.getElementById('newProductName').value = '';
+      document.getElementById('newProductPrice').value = '';
+      document.getElementById('newProductDescription').value = '';
+      document.getElementById('newPhotoFileInput').value = '';
+      document.getElementById('newPhotoUrlInput').value = '';
+      document.getElementById('newUploadStatus').textContent = '';
+      
+      // Hide photo preview
+      const photoPreview = document.getElementById('newPhotoPreview');
+      photoPreview.style.display = 'none';
+    }
+
+    async function addProduct() {
+      const name = document.getElementById('newProductName').value.trim();
+      const price = parseFloat(document.getElementById('newProductPrice').value.trim());
+      const description = document.getElementById('newProductDescription').value.trim();
+      const photoFile = document.getElementById('newPhotoFileInput').files[0];
+      const photoUrl = document.getElementById('newPhotoUrlInput').value.trim();
+      
+      // Validate required fields
+      if (!name || isNaN(price) || price <= 0) {
+        alert('Please enter a valid product name and price (greater than 0).');
+        return;
+      }
+      
+      // Ensure we have some form of image
+      if (!photoFile && !photoUrl) {
+        alert('Please provide either a photo file or photo URL.');
+        return;
+      }
+      
+      // Find next available productId
+      let productId = 0;
+      while (document.querySelector(`[data-product-id="${productId}"]`)) {
+        productId++;
+        // Prevent infinite loop
+        if (productId > 10000) {
+          alert('Too many products. Please contact support.');
+          return;
+        }
+      }
+      
+      // Save basic data to local objects
+      productPrices[productId] = price;
+      if (description) productDescriptions[productId] = description;
+      
+      // Handle photo upload/URL - similar to saveProductDetails
+      let finalPhotoUrl = '';
+      
+      // Priority: URL input > File upload
+      if (photoUrl) {
+        // User provided a URL - use it directly (recommended method)
+        finalPhotoUrl = photoUrl;
+        productPhotos[productId] = finalPhotoUrl;
+        await createProductElement(productId, name, price, description, finalPhotoUrl);
+      } else if (photoFile) {
+        try {
+          // Check file size (limit to 1MB to avoid 413 errors)
+          if (photoFile.size > 1024 * 1024) {
+            alert('Photo is too large. Please use an image smaller than 1MB to avoid server errors.\n\nFor now, photo uploads are limited due to server payload restrictions.\n\nAlternative: Use image URLs from external hosting services.');
+            return;
+          }
+          
+          // Compress and convert file to data URL for storage
+          const compressedDataUrl = await compressImage(photoFile, 0.7, 800);
+          finalPhotoUrl = compressedDataUrl;
+          productPhotos[productId] = finalPhotoUrl;
+          
+          await createProductElement(productId, name, price, description, finalPhotoUrl);
+        } catch (error) {
+          console.error('Error processing photo:', error);
+          alert('Error processing photo. Please try a smaller image or use an image URL instead.');
+          return;
+        }
+      }
+    }
+    
+    // Helper function to create product element in DOM
+    async function createProductElement(productId, name, price, description, imageUrl) {
+      // Add to DOM
+      const gallery = document.getElementById('gallery');
+      const el = document.createElement('div');
+      el.className = 'product';
+      el.dataset.productId = productId;
+      
+      // Use description as display name if available, otherwise use name
+      const displayName = description || name;
+      
+      el.innerHTML = `
+        <img src="${imageUrl}" alt="${name}" loading="lazy">
+        <p>${displayName}</p>
+        <p class="product-price" id="price-${productId}" style="display: block;">£${price.toFixed(2)}</p>
+        <div class="product-detail-card" id="detail-card-${productId}" style="display: none;">
+          <div class="detail-card-content">
+            <div class="detail-product-description" id="detail-description-${productId}"></div>
+            <div class="detail-payment-buttons">
+              <button class="detail-buy-button" onclick="buyProduct(${productId}, '${name.replace(/'/g, "\\'")}', 'paypal')">💳 Buy Now via PayPal</button>
+              <button class="detail-stripe-button" onclick="buyProduct(${productId}, '${name.replace(/'/g, "\\'")}', 'stripe')">💳 Buy Now via Stripe</button>
+            </div>
+            <button class="detail-close-button" onclick="closeDetailCard(${productId}, event)">✕</button>
+          </div>
+        </div>
+        <!-- Mobile touch indicator -->
+        <div class="mobile-touch-indicator" style="display: none;">
+          <span>👆 Tap to view details</span>
+        </div>
+      `;
+      
+      // Add click event listener
+      el.addEventListener('click', () => {
+        if (isManagementMode) {
+          openDescriptionModal(productId, imageUrl, name);
+        } else if (productPrices[productId]) {
+          showPaymentOptions(productId, name);
+        }
+      });
+      
+      gallery.appendChild(el);
+      
+      // Set the purchase card description from the correct source
+      const detailDescription = document.getElementById(`detail-description-${productId}`);
+      const displayText = productDescriptions[productId] || 'N/A';
+      
+      if (detailDescription) {
+        detailDescription.textContent = displayText;
+      }
+      
+      // Add visual indication if description exists
+      if (productDescriptions[productId] && productDescriptions[productId].trim()) {
+        el.classList.add('has-description');
+      }
+      
+      // Add price indication
+      if (productPrices[productId]) {
+        el.classList.add('has-price');
+      }
+      
+      // Save to backend
+      try {
+        await saveData();
+        console.log('New product added and saved successfully');
+        
+        // Update stats and close modal
+        updateDescriptionStats();
+        closeAddProductModal();
+        
+        alert(`✅ Product "${name}" added successfully!`);
+      } catch (error) {
+        console.error('Error saving new product:', error);
+        alert('Product was created but failed to save. Please try refreshing the page.');
+      }
+    }
+    
+    function exportData() {
+      const exportData = {
+        productPrices: productPrices,
+        productDescriptions: productDescriptions,
+        productPhotos: productPhotos,
+        exportDate: new Date().toISOString(),
+        totalProducts: Object.keys(productPrices).length
+      };
+      
+      const dataString = JSON.stringify(exportData, null, 2);
+      
+      // Create a popup with the data
+      const popup = window.open('', '_blank', 'width=600,height=400');
+      popup.document.write(`
+        <html>
+          <head><title>Product Data Export</title></head>
+          <body style="font-family: monospace; padding: 20px; background: #1a1a1a; color: #fff;">
+            <h2>📤 Product Data Export</h2>
+            <p><strong>Export Date:</strong> ${new Date().toLocaleString()}</p>
+            <p><strong>Total Products:</strong> ${Object.keys(productPrices).length}</p>
+            <p><strong>Copy this data:</strong></p>
+            <textarea style="width: 100%; height: 300px; background: #2a2a2a; color: #00ff00; border: 1px solid #333; padding: 10px; font-family: monospace;" readonly>${dataString}</textarea>
+            <br><br>
+            <button onclick="navigator.clipboard.writeText(document.querySelector('textarea').value)" style="background: #00ff00; color: #000; padding: 10px 20px; border: none; cursor: pointer;">📋 Copy to Clipboard</button>
+            <button onclick="window.close()" style="background: #ff3333; color: #fff; padding: 10px 20px; border: none; cursor: pointer; margin-left: 10px;">❌ Close</button>
+          </body>
+        </html>
+      `);
+    }
+    
+    // Save all data to the backend
+    async function saveData() {
+        try {
+            const dataToSave = {
+                productPrices,
+                productDescriptions,
+                productPhotos
+            };
+            
+            console.log('Saving data to backend:', {
+                pricesCount: Object.keys(productPrices).length,
+                descriptionsCount: Object.keys(productDescriptions).length,
+                photosCount: Object.keys(productPhotos).length,
+                totalDataSize: JSON.stringify(dataToSave).length
+            });
+            
+            const response = await fetch(API_URL, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(dataToSave)
+            });
+            
+            console.log('Backend response status:', response.status);
+            
+            if (!response.ok) {
+                const errorText = await response.text();
+                console.error('Backend error response:', errorText);
+                throw new Error(`Server error: ${response.status} - ${errorText}`);
+            }
+            
+            const responseText = await response.text();
+            console.log('Backend success response:', responseText);
+            console.log('Data saved successfully to GitHub repository.');
+            
+            // Verify the save by reloading data
+            await verifyDataSave();
+            
+        } catch (error) {
+            console.error('Error saving data:', error);
+            alert(`Failed to save data: ${error.message}\n\nPlease check that the backend service is running and your GitHub token is configured correctly.`);
+        }
+    }
+    
+    // Verify that data was actually saved to GitHub
+    async function verifyDataSave() {
+        try {
+            console.log('Verifying data save...');
+            const response = await fetch(API_URL);
+            const savedData = await response.json();
+            
+            console.log('Verified saved data:', {
+                pricesCount: Object.keys(savedData.productPrices || {}).length,
+                descriptionsCount: Object.keys(savedData.productDescriptions || {}).length,
+                photosCount: Object.keys(savedData.productPhotos || {}).length
+            });
+            
+            // Check if our data matches what was saved
+            const pricesMatch = JSON.stringify(productPrices) === JSON.stringify(savedData.productPrices || {});
+            const descriptionsMatch = JSON.stringify(productDescriptions) === JSON.stringify(savedData.productDescriptions || {});
+            const photosMatch = JSON.stringify(productPhotos) === JSON.stringify(savedData.productPhotos || {});
+            
+            if (pricesMatch && descriptionsMatch && photosMatch) {
+                console.log('✅ Data verification successful - all data saved correctly');
+            } else {
+                console.warn('⚠️ Data verification failed - saved data does not match local data');
+            }
+            
+        } catch (error) {
+            console.error('Error verifying data save:', error);
+        }
+    }
+    
+    // Manual refresh function to reload data from GitHub
+    async function refreshData() {
+      console.log('Manual refresh triggered...');
+      await loadSavedData();
+    }
+    
+    // Test backend connectivity
+    async function testBackend() {
+        try {
+            const response = await fetch(API_URL);
+            if (response.ok) {
+                console.log('Backend is accessible');
+                return true;
+            } else {
+                console.error('Backend responded with error:', response.status);
+                return false;
+            }
+        } catch (error) {
+            console.error('Backend is not accessible:', error);
+            return false;
+        }
+    }
+    
+    // Initialize
+    loadProducts();
+    // Test backend on page load
+    testBackend();
+    
+    // Function to close all detail cards
+    function closeAllDetailCards() {
+      const allDetailCards = document.querySelectorAll('.product-detail-card');
+      allDetailCards.forEach(card => {
+        card.style.display = 'none';
+      });
+    }
+    
+    // Function to close detail card
+    function closeDetailCard(productId, event) {
+      if (event) event.stopPropagation();
+      if (productId === null || productId === undefined) {
+        console.error('Invalid product ID provided to closeDetailCard');
+        return;
+      }
+      const detailCard = document.getElementById(`detail-card-${productId}`);
+      if (detailCard) {
+        detailCard.style.display = 'none';
+      }
+    }
+  </script>
+</body>
+</html>
